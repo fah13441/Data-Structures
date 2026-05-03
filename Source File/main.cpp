@@ -19,12 +19,12 @@ int main() {
     testArray.loadFromCSV("../Resource File/dataset1-cityA.csv");
     testArray.loadFromCSV("../Resource File/dataset2-cityB.csv");
     testArray.loadFromCSV("../Resource File/dataset3-cityC.csv");
-
+//Member 3
     cout << "\n=== MEMBER 3: CARBON EMISSION ANALYSIS ===" << endl;
 
 analyzeArray(testArray.getArray(), testArray.getSize(), "Master Dataset");
 analyzeLinkedList(testCity.getHead(), "Master Dataset");
-
+//Member 3
     cout << "\n[Original Data]" << endl;
     testCity.display(5);
     testCity.traversal();

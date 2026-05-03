@@ -37,9 +37,10 @@ void ResidentList::insertToEnd(const Resident& r) {
 
 int ResidentList::getSize() {
     return size;
-    Node* ResidentList::getHead() {
-    return head;
 }
+
+Node* ResidentList::getHead() {
+    return head;
 }
 
 void ResidentList::display(int limit) {
@@ -57,7 +58,8 @@ void ResidentList::display(int limit) {
         temp = temp->next;
         count++;
     }
-    cout << "(Showing top " << count << " of " << size << " records)\n" << endl;
+    cout << "(Showing top " << count << " of " << size << " records)\n" << endl; 
+}
     // ========================================== MEMBER 2: TRAVERSAL ==========================================
     void ResidentList::traversal() {
         if (head == nullptr) {
@@ -90,7 +92,7 @@ void ResidentList::display(int limit) {
         cout << "Total carbon emission : " << totalEmission << " kg CO2" << endl;
         cout << "==============================================" << endl;
     }
-}
+
 
 // ========================================== CSV LOADER ==========================================
 void ResidentList::loadFromCSV(string filename) {

@@ -141,35 +141,3 @@ void ResidentArray::searchByAgeRange(int minAge, int maxAge) {
     cout << "Found: " << found << " | Time: " << fixed << setprecision(6) << (double)(end - start) / CLOCKS_PER_SEC << "s\n";
 }
 
-void ResidentArray::searchByTransport(string target) {
-    clock_t start = clock();
-    int found = 0;
-    cout << "\n--- Search: Transport Mode [" << target << "] ---\n";
-    for (int i = 0; i < size; i++) {
-        if (arr[i].transport == target) found++;
-    }
-    clock_t end = clock();
-    cout << "Found: " << found << " | Time: " << fixed << setprecision(6) << (double)(end - start) / CLOCKS_PER_SEC << "s\n";
-}
-
-void ResidentArray::searchByDistance(float threshold) {
-    clock_t start = clock();
-    int found = 0;
-    cout << "\n--- Search: Distance > " << threshold << "km ---\n";
-    for (int i = 0; i < size; i++) {
-        if (arr[i].distance > threshold) found++;
-    }
-    clock_t end = clock();
-    cout << "Found: " << found << " | Time: " << fixed << setprecision(6) << (double)(end - start) / CLOCKS_PER_SEC << "s\n";
-}
-
-void ResidentArray::searchByAgeRange(int minAge, int maxAge) {
-    clock_t start = clock();
-    int found = 0;
-    cout << "\n--- Search: Age Range [" << minAge << " - " << maxAge << "] ---\n";
-    for (int i = 0; i < size; i++) {
-        if (arr[i].age >= minAge && arr[i].age <= maxAge) found++;
-    }
-    clock_t end = clock();
-    cout << "Found: " << found << " | Time: " << fixed << setprecision(6) << (double)(end - start) / CLOCKS_PER_SEC << "s\n";
-}
