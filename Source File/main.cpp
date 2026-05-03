@@ -1,36 +1,36 @@
 #include "../Header/ResidentList.hpp"
 #include "../Header/ResidentArray.hpp"
+#include "../Header/analysis.hpp"
 #include <iostream>
 #include <ctime>
-#include "../analysis.h"
+
 using namespace std;
 
 int main() {
     ResidentList testCity;
     ResidentArray testArray(5000);
 
-    cout << "=== SINGLY LINKED LIST IMPLEMENTATION ===" << endl;
+    cout << "=== DATA STRUCTURES: INTEGRATED ASSIGNMENT RUN ===" << endl;
     cout << "--- Loading Master Dataset ---" << endl;
     
-  testCity.loadFromCSV("Resource File/dataset1-cityA.csv");
-testCity.loadFromCSV("Resource File/dataset2-cityB.csv");
-testCity.loadFromCSV("Resource File/dataset3-cityC.csv");
+    testCity.loadFromCSV("../Resource File/dataset1-cityA.csv");
+    testCity.loadFromCSV("../Resource File/dataset2-cityB.csv");
+    testCity.loadFromCSV("../Resource File/dataset3-cityC.csv");
 
-testArray.loadFromCSV("Resource File/dataset1-cityA.csv");
-testArray.loadFromCSV("Resource File/dataset2-cityB.csv");
-testArray.loadFromCSV("Resource File/dataset3-cityC.csv");
-//Member 3
+    testArray.loadFromCSV("../Resource File/dataset1-cityA.csv");
+    testArray.loadFromCSV("../Resource File/dataset2-cityB.csv");
+    testArray.loadFromCSV("../Resource File/dataset3-cityC.csv");
+
     cout << "\n=== MEMBER 3: CARBON EMISSION ANALYSIS ===" << endl;
+    analyzeArray(testArray.getArray(), testArray.getSize(), "Master Dataset");
+    analyzeLinkedList(testCity.getHead(), "Master Dataset");
 
-analyzeArray(testArray.getArray(), testArray.getSize(), "Master Dataset");
-analyzeLinkedList(testCity.getHead(), "Master Dataset");
-//Member 3
+    cout << "\n=== MEMBER 2: TRAVERSAL ===" << endl;
     cout << "\n[Original Data]" << endl;
     testCity.display(5);
     testCity.traversal();
 
-    // This is to test for sorting function, PLEASE SEE THIS CAUSE WE MAY NEED TO CHANGE THIS. This is only a placeholder =======================================================
-
+    cout << "\n=== MEMBER 4: SORTING ALGORITHMS ===" << endl;
     cout << "\n--- Sorting Master Dataset By Age ---" << endl;
     clock_t startAge = clock();
     testCity.sortListByAge();
@@ -47,18 +47,18 @@ analyzeLinkedList(testCity.getHead(), "Master Dataset");
     testCity.sortListByEmission();
     testCity.display(5);
 
-    // Using this to test the searthing function, PLEASE CHECK THIS OUT ALSO CAUSE WE MAY NEED TO CHANGE THIS ============================================
-    cout << "\n--- Testing Search Functions ---" << endl;
+    cout << "\n=== MEMBER 4: SEARCHING ALGORITHMS ===" << endl;
     testCity.searchByAgeGroup(20, 25);
     testCity.searchByTransport("Walking");
 
-    // Member 5: Performance Search Testing
+    cout << "\n=== MEMBER 5: PERFORMANCE TRACKING ===" << endl;
     testCity.searchByAgeRangeLL(18, 25);
     testCity.searchByTransportLL("Car");
     testCity.searchByDistanceLL(15.0);
-    testArray.searchByAgeRange(18, 25);
-    testArray.searchByTransport("Car");
-    testArray.searchByDistance(15.0);
+    
+    testArray.searchByAgeRangePerf(18, 25);
+    testArray.searchByTransportPerf("Car");
+    testArray.searchByDistancePerf(15.0);
     
     return 0;
 }

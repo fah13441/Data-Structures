@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+#include <ctime>
 
 using namespace std;
 
@@ -35,13 +36,8 @@ void ResidentList::insertToEnd(const Resident& r) {
     size++;
 }
 
-int ResidentList::getSize() {
-    return size;
-}
-
-Node* ResidentList::getHead() {
-    return head;
-}
+int ResidentList::getSize() { return size; }
+Node* ResidentList::getHead() { return head; }
 
 void ResidentList::display(int limit) {
     cout << left << setw(8) << "ID" << setw(6) << "Age" << setw(15) << "Transport"
@@ -50,7 +46,6 @@ void ResidentList::display(int limit) {
 
     Node* temp = head;
     int count = 0;
-    
     while (temp != nullptr && count < limit) {
         cout << left << setw(8) << temp->data.id << setw(6) << temp->data.age
              << setw(15) << temp->data.transport << setw(12) << temp->data.distance
@@ -60,88 +55,67 @@ void ResidentList::display(int limit) {
     }
     cout << "(Showing top " << count << " of " << size << " records)\n" << endl; 
 }
-    // ========================================== MEMBER 2: TRAVERSAL ==========================================
-    void ResidentList::traversal() {
-        if (head == nullptr) {
-            cout << "List is empty. Nothing to traverse." << endl;
-            return;
-        }
 
-        cout << "\n===== TRAVERSAL: Carbon Emission Summary =====" << endl;
-        cout << "----------------------------------------------" << endl;
+void ResidentList::traversal() {
+    if (head == nullptr) return;
+    cout << "\n===== TRAVERSAL: Carbon Emission Summary =====" << endl;
+    cout << "----------------------------------------------" << endl;
 
-        Node* current = head;
-        int nodeCount = 0;
-        float totalEmission = 0.0f;
+    Node* current = head;
+    int nodeCount = 0;
+    float totalEmission = 0.0f;
 
-        while (current != nullptr) {
-            nodeCount++;
-            float emission = current->data.getTotalEmission();
-            totalEmission += emission;
-
-            cout << "Node " << nodeCount
-                << ": ID = " << current->data.id
-                << " | Transport = " << current->data.transport
-                << " | Emission = " << emission << " kg CO2" << endl;
-
-            current = current->next;
-        }
-
-        cout << "----------------------------------------------" << endl;
-        cout << "Total nodes traversed : " << nodeCount << endl;
-        cout << "Total carbon emission : " << totalEmission << " kg CO2" << endl;
-        cout << "==============================================" << endl;
+    while (current != nullptr) {
+        nodeCount++;
+        float emission = current->data.getTotalEmission();
+        totalEmission += emission;
+        cout << "Node " << nodeCount << ": ID = " << current->data.id
+             << " | Transport = " << current->data.transport
+             << " | Emission = " << emission << " kg CO2" << endl;
+        current = current->next;
     }
+    cout << "----------------------------------------------" << endl;
+    cout << "Total nodes traversed : " << nodeCount << endl;
+    cout << "Total carbon emission : " << totalEmission << " kg CO2" << endl;
+    cout << "==============================================" << endl;
+}
 
-
-// ========================================== CSV LOADER ==========================================
 void ResidentList::loadFromCSV(string filename) {
     ifstream file(filename);
-
     if (!file.is_open()) {
         cout << "Error opening file: " << filename << endl;
         return;
     }
-
     string line;
     int loadCount = 0;
-    
     getline(file, line); 
 
     while (getline(file, line)) {
         if (line.empty() || line == "\r" || line == "\n") continue;
-
         Resident r;
         size_t pos = 0;
-
         try {
             pos = line.find(','); r.id = line.substr(0, pos); line.erase(0, pos + 1);
-            if (r.id == "ID" || r.id == "id") continue; // Extra safety skip
-
+            if (r.id == "ID" || r.id == "id") continue; 
             pos = line.find(','); r.age = stoi(line.substr(0, pos)); line.erase(0, pos + 1);
             pos = line.find(','); r.transport = line.substr(0, pos); line.erase(0, pos + 1);
             pos = line.find(','); r.distance = stof(line.substr(0, pos)); line.erase(0, pos + 1);
             pos = line.find(','); r.emissionFactor = stof(line.substr(0, pos)); line.erase(0, pos + 1);
-            r.days = stoi(line); // Last item
+            r.days = stoi(line); 
 
             insertToEnd(r);
             loadCount++;
-        } catch (...) {
-        }
+        } catch (...) {}
     }
     file.close();
     cout << "- Loaded " << loadCount << " records from " << filename << endl;
 }
 
-// ========================================== SORTING ==========================================
-
 void ResidentList::sortListByAge() {
     for (Node* i = head; i != nullptr; i = i->next) {
         Node* minNode = i;
         for (Node* j = i->next; j != nullptr; j = j->next) {
-            if (j->data.age < minNode->data.age) {
-                minNode = j;
-            }
+            if (j->data.age < minNode->data.age) minNode = j;
         }
         if (minNode != i) {
             Resident temp = i->data;
@@ -155,9 +129,7 @@ void ResidentList::sortListByDistance() {
     for (Node* i = head; i != nullptr; i = i->next) {
         Node* minNode = i;
         for (Node* j = i->next; j != nullptr; j = j->next) {
-            if (j->data.distance < minNode->data.distance) {
-                minNode = j;
-            }
+            if (j->data.distance < minNode->data.distance) minNode = j;
         }
         if (minNode != i) {
             Resident temp = i->data;
@@ -171,9 +143,7 @@ void ResidentList::sortListByEmission() {
     for (Node* i = head; i != nullptr; i = i->next) {
         Node* minNode = i;
         for (Node* j = i->next; j != nullptr; j = j->next) {
-            if (j->data.getTotalEmission() < minNode->data.getTotalEmission()) {
-                minNode = j;
-            }
+            if (j->data.getTotalEmission() < minNode->data.getTotalEmission()) minNode = j;
         }
         if (minNode != i) {
             Resident temp = i->data;
@@ -182,8 +152,6 @@ void ResidentList::sortListByEmission() {
         }
     }
 }
-
-// ========================================== SEARCHING ==========================================
 
 void ResidentList::searchByAgeGroup(int minAge, int maxAge) {
     cout << "\n[Search Results: Age " << minAge << " to " << maxAge << "]" << endl;
@@ -227,9 +195,6 @@ void ResidentList::searchByDistanceGreaterThan(float minDistance) {
     cout << "Total Found: " << count << endl;
 }
 
-// ==========================================================
-// Member 5: Searching & Performance Functions (Linked List)
-// ==========================================================
 void ResidentList::searchByTransportLL(string target) {
     clock_t start = clock();
     int found = 0;
@@ -239,7 +204,7 @@ void ResidentList::searchByTransportLL(string target) {
         current = current->next;
     }
     clock_t end = clock();
-    cout << "\n--- [LL] Search: Transport [" << target << "] ---\n";
+    cout << "\n--- [LL] Performance Search: Transport [" << target << "] ---\n";
     cout << "Found: " << found << " | Time: " << fixed << setprecision(6) << (double)(end - start) / CLOCKS_PER_SEC << "s\n";
 }
 
@@ -252,7 +217,7 @@ void ResidentList::searchByDistanceLL(float threshold) {
         current = current->next;
     }
     clock_t end = clock();
-    cout << "\n--- [LL] Search: Distance > " << threshold << "km ---\n";
+    cout << "\n--- [LL] Performance Search: Distance > " << threshold << "km ---\n";
     cout << "Found: " << found << " | Time: " << fixed << setprecision(6) << (double)(end - start) / CLOCKS_PER_SEC << "s\n";
 }
 
@@ -265,6 +230,6 @@ void ResidentList::searchByAgeRangeLL(int minAge, int maxAge) {
         current = current->next;
     }
     clock_t end = clock();
-    cout << "\n--- [LL] Search: Age Range [" << minAge << "-" << maxAge << "] ---\n";
+    cout << "\n--- [LL] Performance Search: Age Range [" << minAge << "-" << maxAge << "] ---\n";
     cout << "Found: " << found << " | Time: " << fixed << setprecision(6) << (double)(end - start) / CLOCKS_PER_SEC << "s\n";
 }

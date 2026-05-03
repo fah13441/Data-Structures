@@ -4,7 +4,6 @@
 #include "Resident.hpp"
 #include <string>
 
-// Custom Singly Linked List Node (No STL)
 struct Node {
     Resident data;
     Node* next;
@@ -23,30 +22,18 @@ public:
     void insertToEnd(const Resident& r);
     void display(int limit = 10);
     void traversal();
-    
-    // Custom CSV Loader without <sstream>
     void loadFromCSV(std::string filename);
 
     int getSize();
-Node* getHead();
-    // ==========================================
-    // Member 4: Sorting Functions
-    // ==========================================
+    Node* getHead();
+
     void sortListByAge();
     void sortListByDistance();
     void sortListByEmission();
-
-    // ==========================================
-    // Member 4: Searching Functions
-    // ==========================================
     void searchByAgeGroup(int minAge, int maxAge);
     void searchByTransport(std::string transportType);
     void searchByDistanceGreaterThan(float minDistance);
-
-    // ==========================================================
-    // Member 5: Searching & Performance Functions (Linked List)
-    // ==========================================================
-    void searchByTransportLL(string target);
+    void searchByTransportLL(std::string target);
     void searchByDistanceLL(float threshold);
     void searchByAgeRangeLL(int minAge, int maxAge);
 };

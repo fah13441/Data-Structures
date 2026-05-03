@@ -20,12 +20,18 @@ public:
     void display(int limit = 10);
     void loadFromCSV(std::string filename);
 
-    void searchByTransport(string target);
-    void searchByDistance(float threshold);
-    void searchByAgeRange(int minAge, int maxAge);
-
     int getSize();
     Resident* getArray();
+
+    void sortArrayByAge();
+    void sortArrayByDistance();
+    void sortArrayByEmission();
+    void searchByAgeGroup(int minAge, int maxAge);
+    void searchByTransport(std::string transportType);
+    void searchByDistanceGreaterThan(float minDistance);
+    void searchByTransportPerf(std::string target);
+    void searchByDistancePerf(float threshold);
+    void searchByAgeRangePerf(int minAge, int maxAge);
 };
 
 #endif
