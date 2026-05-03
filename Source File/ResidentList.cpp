@@ -37,6 +37,9 @@ void ResidentList::insertToEnd(const Resident& r) {
 
 int ResidentList::getSize() {
     return size;
+    Node* ResidentList::getHead() {
+    return head;
+}
 }
 
 void ResidentList::display(int limit) {

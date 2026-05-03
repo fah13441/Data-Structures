@@ -28,7 +28,7 @@ public:
     void loadFromCSV(std::string filename);
 
     int getSize();
-
+Node* getHead();
     // ==========================================
     // Member 4: Sorting Functions
     // ==========================================
