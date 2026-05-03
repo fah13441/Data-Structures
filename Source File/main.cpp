@@ -12,13 +12,13 @@ int main() {
     cout << "=== SINGLY LINKED LIST IMPLEMENTATION ===" << endl;
     cout << "--- Loading Master Dataset ---" << endl;
     
-    testCity.loadFromCSV("../Resource File/dataset1-cityA.csv");
-    testCity.loadFromCSV("../Resource File/dataset2-cityB.csv");
-    testCity.loadFromCSV("../Resource File/dataset3-cityC.csv");
+  testCity.loadFromCSV("Resource File/dataset1-cityA.csv");
+testCity.loadFromCSV("Resource File/dataset2-cityB.csv");
+testCity.loadFromCSV("Resource File/dataset3-cityC.csv");
 
-    testArray.loadFromCSV("../Resource File/dataset1-cityA.csv");
-    testArray.loadFromCSV("../Resource File/dataset2-cityB.csv");
-    testArray.loadFromCSV("../Resource File/dataset3-cityC.csv");
+testArray.loadFromCSV("Resource File/dataset1-cityA.csv");
+testArray.loadFromCSV("Resource File/dataset2-cityB.csv");
+testArray.loadFromCSV("Resource File/dataset3-cityC.csv");
 //Member 3
     cout << "\n=== MEMBER 3: CARBON EMISSION ANALYSIS ===" << endl;
 
