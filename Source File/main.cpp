@@ -2,7 +2,7 @@
 #include "../Header/ResidentArray.hpp"
 #include <iostream>
 #include <ctime>
-
+#include "../analysis.h"
 using namespace std;
 
 int main() {
@@ -19,6 +19,11 @@ int main() {
     testArray.loadFromCSV("../Resource File/dataset1-cityA.csv");
     testArray.loadFromCSV("../Resource File/dataset2-cityB.csv");
     testArray.loadFromCSV("../Resource File/dataset3-cityC.csv");
+
+    cout << "\n=== MEMBER 3: CARBON EMISSION ANALYSIS ===" << endl;
+
+analyzeArray(testArray.getArray(), testArray.getSize(), "Master Dataset");
+analyzeLinkedList(testCity.getHead(), "Master Dataset");
 
     cout << "\n[Original Data]" << endl;
     testCity.display(5);
