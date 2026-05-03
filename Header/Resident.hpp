@@ -11,6 +11,7 @@ struct Resident {
     float distance;
     float emissionFactor;
     int days;
+
     float getTotalEmission() const {
         return distance * emissionFactor * days;
     }
